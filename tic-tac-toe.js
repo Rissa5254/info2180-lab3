@@ -1,4 +1,5 @@
 //===========Layout Board========
+
 // Wait for the page to finish load
 window.addEventListener("DOMContentLoaded", function(){
     // Select the board grid
@@ -17,13 +18,14 @@ window.addEventListener("DOMContentLoaded", function(){
         const square  = squares[i];
         square.classList.add("square");
 
+
     //==============Add X or O to Square==========
-    
+
     // Clicks square to alternate putting X or O
     square.addEventListener("click", function(){
-        if(square.textContent === ''){                  // If square is empty
-            square.textContent = currentPlayer;         // Set text it eirther X or O
-            square.classList.add(currentPlayer)       // Add class for styling
+        if(square.textContent === ''){                 // If square is empty
+            square.textContent = currentPlayer;       // Set text it eirther X or O
+            square.classList.add(currentPlayer)      // Add class for styling
 
             gamestate[i] = currentPlayer;     // Update the game state
             
@@ -35,6 +37,12 @@ window.addEventListener("DOMContentLoaded", function(){
             }
         }
     });
+
+
+    //=============Styling the Mouse================
+
+
+
     }
 });
 
