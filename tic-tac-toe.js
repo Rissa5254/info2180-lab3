@@ -7,23 +7,23 @@ window.addEventListener("DOMContentLoaded", function(){
     // Div inside the game board (3x3 grid, 9 squares)
     const squares = board.getElementsByTagName("div");
 
+    // Track game state 
+    let gamestate = new Array(9).fill(null);
+
+    let currentPlayer = "X";
+
     // Looping and Adding the square class
     for(let i = 0; i < squares.length; i++){
         const square  = squares[i];
         square.classList.add("square");
 
     //==============Add X or O to Square==========
-
-    // Track game state 
-    let gamestate = new Array(9).fill(null);
-
-    let currentPlayer = 'X';
     
     // Clicks square to alternate putting X or O
     square.addEventListener("click", function(){
         if(square.textContent === ''){                  // If square is empty
             square.textContent = currentPlayer;         // Set text it eirther X or O
-            square.classList.add("currentPlayer")       // Add class for styling
+            square.classList.add(currentPlayer)       // Add class for styling
 
             gamestate[i] = currentPlayer;     // Update the game state
             
@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", function(){
             if (currentPlayer === "X"){       // Alternate between X and O
                 currentPlayer = "O";
             } else{
-                currentPlayer === "X";
+                currentPlayer = "X";
             }
         }
     });
