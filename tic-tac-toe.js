@@ -40,8 +40,18 @@ window.addEventListener("DOMContentLoaded", function(){
 
 
     //=============Styling the Mouse================
+    square.addEventListener("mouseenter", function(){
+        square.classList.add("hover");
+        console.log("Mouse has enter this square.");
+    })
+    square.addEventListener("mouseleave", function(){
+        square.classList.remove("hover");
+        console.log("Mouse has left this square.");
+    })
 
 
+    //===========Checking for Winner and Updating Status==========
+    
 
     }
 });
