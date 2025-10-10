@@ -8,6 +8,8 @@ window.addEventListener("DOMContentLoaded", function(){
     // Div inside the game board (3x3 grid, 9 squares)
     const squares = board.getElementsByTagName("div");
 
+    const statusdiv = document.getElementById("status");
+
     // Track game state 
     let gamestate = new Array(9).fill(null);
 
@@ -21,21 +23,21 @@ window.addEventListener("DOMContentLoaded", function(){
         square.classList.add("square");
 
 
-    //==============Add X or O to Square==========
+    //=============Adding X or O to Square==========
 
     // Clicks square to alternate putting X or O
     square.addEventListener("click", function(){
-        if(gameOver || square.textContent !== '') return;  // Stop moves after winner
-            square.textContent = currentPlayer;       // Set text it eirther X or O
-            square.classList.add(currentPlayer)      // Add class for styling
+        if(gameOver || square.textContent !== '') return;      // Stop moves after winner
+            square.textContent = currentPlayer;               // Set text it eirther X or O
+            square.classList.add(currentPlayer)              // Add class for styling
 
             gamestate[i] = currentPlayer;     // Update the game state
 
             // Check if X or O is the Winner after each move
-            const Winner = document.getElementById("status");
+            
             if (checkWinner(gamestate,currentPlayer)){
-                Winner.textContent = `Congratulations! ${currentPlayer} is the Winner!`;
-                Winner.classList.add("you-won");
+                statusdiv.textContent = `Congratulations! ${currentPlayer} is the Winner!`;
+                statusdiv.classList.add("you-won");
                 gameOver = true;
             }
             
@@ -44,7 +46,7 @@ window.addEventListener("DOMContentLoaded", function(){
                 currentPlayer = "O";
             } else{
                 currentPlayer = "X";
-            }
+            } 
     });
 
 
@@ -79,7 +81,33 @@ window.addEventListener("DOMContentLoaded", function(){
         return false;      // The player does not have 3 in a row.
     }
     };
+
+
+    //=================Restarting the Game===================
+    const newgame = document.querySelector(".btn");
+    newgame.addEventListener("click", function(){
+        gamestate.fill(null);
+        gameOver = false;
+        currentPlayer = "X";
+        console.log("New Game.");
+
+
+        // Clear squares
+        for(let i = 0; i < squares.length; i++){
+            squares[i].textContent = "";
+            squares[i].classList.remove("X", "O");
+        }
+
+        // Reset status message
+        statusdiv.textContent = "Move your mouse over a square and click to play an X or an O.";
+        statusdiv.classList.remove("you-won");  
+    });    
+
 });
+
+
+
+ 
 
   
 
