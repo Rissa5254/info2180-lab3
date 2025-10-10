@@ -13,6 +13,8 @@ window.addEventListener("DOMContentLoaded", function(){
 
     let currentPlayer = "X";
 
+    let gameOver = false; 
+
     // Looping and Adding the square class
     for(let i = 0; i < squares.length; i++){
         const square  = squares[i];
@@ -23,11 +25,19 @@ window.addEventListener("DOMContentLoaded", function(){
 
     // Clicks square to alternate putting X or O
     square.addEventListener("click", function(){
-        if(square.textContent === ''){                 // If square is empty
+        if(gameOver || square.textContent !== '') return;  // Stop moves after winner
             square.textContent = currentPlayer;       // Set text it eirther X or O
             square.classList.add(currentPlayer)      // Add class for styling
 
             gamestate[i] = currentPlayer;     // Update the game state
+
+            // Check if X or O is the Winner after each move
+            const Winner = document.getElementById("status");
+            if (checkWinner(gamestate,currentPlayer)){
+                Winner.textContent = `Congratulations! ${currentPlayer} is the Winner!`;
+                Winner.classList.add("you-won");
+                gameOver = true;
+            }
             
             // Switch Player
             if (currentPlayer === "X"){       // Alternate between X and O
@@ -35,7 +45,6 @@ window.addEventListener("DOMContentLoaded", function(){
             } else{
                 currentPlayer = "X";
             }
-        }
     });
 
 
@@ -51,10 +60,27 @@ window.addEventListener("DOMContentLoaded", function(){
 
 
     //===========Checking for Winner and Updating Status==========
-    
 
+    // Function to check winner
+    function checkWinner(board, player){
+        const winningCombo = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],       // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],       // columns
+            [0, 4, 8], [2, 4, 6]                   // diagonals 
+        ];
+        
+        for(let combo of winningCombo){
+            const[a, b, c] = combo;
+
+            if(board[a] === player && board[b] === player && board[c] === player){
+                return true;   // The player has 3 in a row.
+            }
+        }
+        return false;      // The player does not have 3 in a row.
     }
+    };
 });
 
+  
 
 
