@@ -91,7 +91,6 @@ window.addEventListener("DOMContentLoaded", function(){
         currentPlayer = "X";
         console.log("New Game.");
 
-
         // Clear squares
         for(let i = 0; i < squares.length; i++){
             squares[i].textContent = "";
